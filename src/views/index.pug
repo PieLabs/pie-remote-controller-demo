@@ -1,0 +1,40 @@
+doctype html
+html 
+  head 
+    script(src=viewJs)
+    script(src="/remote-controller.js")
+
+    script.
+
+      let controller = new RemoteController(!{JSON.stringify(endpoints)});
+      let env = { mode: 'gather'};
+      let session = [];
+      let elementModels = !{elementModels ? JSON.stringify(elementModels) : '[]'};
+      let player = null;
+
+      document.addEventListener('pie.player-ready', (e) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        player = event.target;
+        player.controller = controller;
+        player.env = env;
+        player.session = session;
+        player.elementModels = elementModels;
+      });
+
+      document.addEventListener('pie.control-panel-ready', (e) => {
+        let controlPanel = event.target;
+
+        controlPanel.addEventListener('envChanged', e => {
+          player.env = env;
+        });
+
+        controlPanel.env = env;
+      });
+
+    title Test
+
+  body 
+    pie-control-panel 
+    pie-player
+      | !{markup}
