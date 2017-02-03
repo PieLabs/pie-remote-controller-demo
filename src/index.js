@@ -58,7 +58,6 @@ function run(args) {
   });
 
   app.post('/model', (req, res) => {
-    console.log(req.body);
     let {session, env} = req.body;
     controller.model(session, env)
       .then(m => {
@@ -71,7 +70,6 @@ function run(args) {
 
   app.get('/' + parsed.viewJs, (req, res) => {
     let jsPath = join(parsed.cwd, parsed.viewJs);
-    console.log('>>> !exists?', jsPath, existsSync(jsPath));
     let rs = createReadStream(jsPath);
     res.setHeader('Content-Type', 'text/javascript');
     rs.pipe(res);
