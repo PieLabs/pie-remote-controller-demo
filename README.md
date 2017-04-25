@@ -2,6 +2,7 @@
 
 This is a simple web app that demonstrates rendering a pie on the client and running controller logic on the server. This setup would typically be required in a secure testing environment.
 
+> Requires `pie >= 7.3.0`.
 
 ## Installation 
 
@@ -36,7 +37,7 @@ The other 2 files are used to define a pie item, so should already exist.
 ```shell
 cd my-pie/docs/demo
 ls -la  #=> config.json, index.html
-pie pack #=> builds the 2 js files
+pie pack --addPlayerAndControlPanel #=> builds the 2 js files
 prcd
 # or if you want to run it locally 
 npm install PieLabs/pie-remote-controller-demo
