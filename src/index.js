@@ -4,8 +4,8 @@ const http = require('http');
 const opn = require('opn');
 const _ = require('lodash');
 const pug = require('pug');
-const {join} = require('path');
-const {readJsonSync, readFileSync, existsSync, createReadStream} = require('fs-extra');
+const { join } = require('path');
+const { readJsonSync, readFileSync, existsSync, createReadStream } = require('fs-extra');
 const jsesc = require('jsesc');
 const PieController = require('./pie-controller').default;
 const bodyParser = require('body-parser');
@@ -17,7 +17,7 @@ function run(args) {
     launchBrowser: false,
     cwd: process.cwd(),
     viewJs: 'pie-view.js',
-    controllerJs: 'pie-controller.js',
+    controllerJs: 'pie-controllers.js',
     markup: 'index.html',
     config: 'config.json'
   }, minimist(args));
@@ -58,7 +58,7 @@ function run(args) {
   });
 
   app.post('/model', (req, res) => {
-    let {session, env} = req.body;
+    let { session, env } = req.body;
     controller.model(session, env)
       .then(m => {
         res.json(m);
